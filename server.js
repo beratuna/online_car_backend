@@ -28,7 +28,7 @@ app.use("/user", userRoutes)
 
 const  server = http.createServer(app);
 app.use((req, res /* next */) => res.status(403).json({ message: 'Not found' }));
-server.listen(8080);
+server.listen(8080, () => console.log('API is running on http://localhost:8080/login'));
 
 // app.listen(8080, () => console.log('API is running on http://localhost:8080/login'));
 

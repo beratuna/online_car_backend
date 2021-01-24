@@ -30,9 +30,6 @@ exports.loginUser= (req, res) => {
             res.status(401).json({message: "invalid info"});
         }
       })
-    // res.send({
-    //     token: 'test123'
-    // });
 };
 
   

@@ -2,7 +2,7 @@ const path = require('path');
 const http = require('http');
 const express = require('express');
 // const cors = require('cors');
-const userRoutes = require("./userRoutes");
+const routes = require("./routes");
 const app = express();
 const bodyParser = require('body-parser');
 
@@ -24,7 +24,8 @@ app.use((req, res, next) => {
 });
 
 app.use(express.static(path.join(path.dirname(__dirname), '/frontend/build')));
-app.use("/user", userRoutes)
+app.use("/user", routes)
+app.use("/customer", routes)
 
 const  server = http.createServer(app);
 app.use((req, res /* next */) => res.status(403).json({ message: 'Not found' }));

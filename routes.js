@@ -9,5 +9,6 @@ router.post('/login', UserController.loginUser);
 router.post('/trackId', CustomerController.getTrackId);
 router.post('/requestService', CustomerController.saveServiceRequest);
 router.post('/requestPrice', CustomerController.savePriceOfferRequest);
+router.post('/managerInfo', UserController.managerInfo);
 
 module.exports = router;

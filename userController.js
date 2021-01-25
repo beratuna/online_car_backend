@@ -32,4 +32,29 @@ exports.loginUser= (req, res) => {
       })
 };
 
+exports.managerInfo = (req, res) => {
+  if (req.body.employeeType == 'salesperson'){
+    var qr = 'SELECT * FROM salesperson ORDER BY email ASC';
+  }
+  else{
+      var qr = 'SELECT * FROM receptionist ORDER BY email ASC';
+  }
+  console.log(req.body);
+
+  pool.query(qr, (error, results) => {
+    if (error) {
+      throw error
+    }
+    if(results && results.rows && results.rows.length>0){
+        res.status(200).json(results.rows)
+        console.log(results.rows);
+    }
+    else{
+        res.status(401).json({message: "invalid info"});
+    }
+
+  })
+
+};
+
   

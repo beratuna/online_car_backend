@@ -7,7 +7,12 @@ exports.getTrackId = (req, res) => {
           throw error
         }
         console.log(results);
-        res.status(200).json(results.rows)
+        if(results && results.rows && results.rows.length>0){
+            res.status(200).json(results.rows)
+        }
+        else{
+            res.status(401).json({message: "invalid info"});
+        }
       })
     };
 

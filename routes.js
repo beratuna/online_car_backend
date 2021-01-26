@@ -10,5 +10,6 @@ router.post('/trackId', CustomerController.getTrackId);
 router.post('/requestService', CustomerController.saveServiceRequest);
 router.post('/requestPrice', CustomerController.savePriceOfferRequest);
 router.post('/managerInfo', UserController.managerInfo);
+router.post('/recepInfo', UserController.recepInfo);
 
 module.exports = router;

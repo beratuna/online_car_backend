@@ -58,3 +58,33 @@ exports.managerInfo = (req, res) => {
 };
 
   
+
+exports.recepInfo = (req, res) => {
+  if (req.body.reservationType == 'service'){
+    var qr = 'SELECT * FROM car WHERE city = $1';
+    var ls = [req.body.city];
+    console.log(req.body.city);
+  }
+  else{
+      var qr = "SELECT * FROM reservation LEFT JOIN customer ON customer.email=reservation.customer WHERE reservation.city = $1 and reservationType = $2";
+      // customer, phone, city, reservationtype, reservationstatus, 
+      // email, name, surname, phone, city
+      var ls = [req.body.city, 'price'];
+  }
+
+  pool.query(qr, ls, (error, results) => {
+    if (error) {
+      throw error
+    }
+      console.log(results.rows);
+    if(results && results.rows && results.rows.length>0){
+        res.status(200).json(results.rows)
+        console.log(results.rows);
+    }
+    else{
+        res.status(401).json({message: "invalid info"});
+    }
+
+  })
+
+};

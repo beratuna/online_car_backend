@@ -13,9 +13,13 @@ exports.getTrackId = (req, res) => {
         else{
             res.status(401).json({message: "invalid info"});
         }
+
       })
     };
 
+function uniqueID() {
+    return Math.floor(Math.random() * Date.now())
+}
 exports.saveServiceRequest = (req, res) => {
     console.log(req.body);
     pool.query('INSERT INTO customer (email, name, surname, phone, city) VALUES ($1, $2, $3, $4, $5) ON CONFLICT (email) DO NOTHING', [req.body.email, req.body.name, req.body.surname ,req.body.phone, req.body.showroom], (error, results) => {
@@ -28,9 +32,14 @@ exports.saveServiceRequest = (req, res) => {
             throw error
             }
             console.log(results);
-            res.status(200).json(true)
+            var uni_code = uniqueID();
+            pool.query('INSERT INTO car (licencenumber, model, plate, condition, trackId, ownername, ownersurname, owneremail) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)', [req.body.plateNumber, req.body.carModel, req.body.plateNumber, "Waiting for Appointment Approval", uni_code, req.body.name, req.body.surname, req.body.email], (error, results) => {
+                if (error) {
+                throw error
+                }
+                res.status(200).json({trackId: uni_code})
+            })
         })
-        console.log(results);
       })
 }
 

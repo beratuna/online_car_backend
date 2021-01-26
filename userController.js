@@ -34,14 +34,14 @@ exports.loginUser= (req, res) => {
 
 exports.managerInfo = (req, res) => {
   if (req.body.employeeType == 'salesperson'){
-    var qr = 'SELECT * FROM salesperson ORDER BY email ASC';
+    var qr = 'SELECT * FROM salesperson WHERE city = $1 ORDER BY name ASC';
   }
   else{
-      var qr = 'SELECT * FROM receptionist ORDER BY email ASC';
+      var qr = 'SELECT * FROM receptionist WHERE city = $1 ORDER BY name ASC';
   }
   console.log(req.body);
 
-  pool.query(qr, (error, results) => {
+  pool.query(qr, [req.body.city], (error, results) => {
     if (error) {
       throw error
     }

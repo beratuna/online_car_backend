@@ -50,7 +50,7 @@ exports.managerInfo = (req, res) => {
         console.log(results.rows);
     }
     else{
-        res.status(401).json({message: "invalid info"});
+      res.status(200).json();
     }
 
   })
@@ -82,7 +82,7 @@ exports.recepInfo = (req, res) => {
         console.log(results.rows);
     }
     else{
-        res.status(401).json({message: "invalid info"});
+        res.status(200).json();
     }
 
   })

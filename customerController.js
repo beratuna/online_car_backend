@@ -32,7 +32,7 @@ exports.saveServiceRequest = (req, res) => {
             throw error
             }
             console.log(results);
-            var uni_code = uniqueID();
+            var uni_code = "ocss" + uniqueID();
             pool.query('INSERT INTO car (licencenumber, model, plate, condition, trackId, name, surname, email, city) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)', [req.body.plateNumber, req.body.carModel, req.body.plateNumber, "Waiting for Appointment Approval", uni_code, req.body.name, req.body.surname, req.body.email, req.body.city], (error, results) => {
                 if (error) {
                 throw error
